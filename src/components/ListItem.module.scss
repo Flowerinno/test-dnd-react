@@ -1,0 +1,55 @@
+.listItem {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	gap: 20px;
+	width: 200px;
+	height: 50px;
+
+	.util {
+		display: flex;
+		align-items: center;
+
+		.name {
+			font-size: 20px;
+			min-width: 100px;
+			min-height: 25px;
+
+			padding: 1rem;
+			border: none;
+			outline: none;
+			background-color: rgb(20, 18, 18);
+			color: whitesmoke;
+
+			&:hover {
+				cursor: grabbing;
+			}
+		}
+
+		.editing {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 5px;
+			min-width: 70px;
+		}
+
+		.notEditing {
+			display: flex;
+			min-width: 150px;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	.childrenNodes {
+		margin-top: 20px;
+		min-width: 200px;
+		height: 100px;
+		display: flex;
+		flex-flow: row;
+		gap: 10rem;
+	}
+}
