@@ -27,6 +27,7 @@ interface ListItemProps {
 	onMouseUp: (e: React.MouseEvent<HTMLDivElement>) => void;
 	onMouseMove: (e: React.MouseEvent<HTMLDivElement>) => void;
 	setUpdateCount: React.Dispatch<React.SetStateAction<number>>;
+	index?: number;
 }
 
 const ListItem: React.FC<ListItemProps> = ({
@@ -37,6 +38,7 @@ const ListItem: React.FC<ListItemProps> = ({
 	onMouseUp,
 	onMouseMove,
 	setUpdateCount,
+	index,
 }) => {
 	const ref = useRef<HTMLInputElement>(null);
 
@@ -64,6 +66,11 @@ const ListItem: React.FC<ListItemProps> = ({
 		setUpdateCount((prevCount) => prevCount + 1);
 	};
 
+	let direction = "";
+	if (index && index !== 0) {
+		direction = "left";
+	}
+
 	return (
 		<div
 			className={styles.listItem}
@@ -73,7 +80,13 @@ const ListItem: React.FC<ListItemProps> = ({
 		>
 			<div className={styles.util}>
 				{!isEditting ? (
-					<span className={styles.name}>{name}</span>
+					<span
+						className={`${styles.name} 
+					${children.length >= 1 ? styles.vertical : ""}
+					${name !== "Categories" && styles[direction]}`}
+					>
+						{name}
+					</span>
 				) : (
 					<input
 						ref={ref}
@@ -127,7 +140,7 @@ const ListItem: React.FC<ListItemProps> = ({
 
 			<div className={styles.childrenNodes}>
 				{children?.length > 0 &&
-					children?.map((item) => (
+					children?.map((item, index) => (
 						<ListItem
 							key={item.id}
 							id={item.id}
@@ -137,6 +150,7 @@ const ListItem: React.FC<ListItemProps> = ({
 							onMouseUp={onMouseUp}
 							setUpdateCount={setUpdateCount}
 							children={item.children}
+							index={index}
 						/>
 					))}
 			</div>
